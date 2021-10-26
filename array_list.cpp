@@ -116,6 +116,7 @@ class ArrayList {
     }
 
 
+    //not correct results yet
     void insert(int val, int index) {
         if (0 <= index < size) { //checking if legal argument
             size += 1;
@@ -123,11 +124,33 @@ class ArrayList {
                 data[i] = data[i+1];
             }
             data[index] = val;
-    } else {
+        } 
+        else {
         throw range_error("Capacity full");
+        }
     }
 
+    //need to implement a way to remve the last eleement. Have done the 'rotation'
+    void remove(int index) {
+        for(int i=index;i<size-1;++i){
+                data[i]=data[i+1];
+        }
+        // delete[] data[size-1];
+
+
     }
+    int pop(int index) {
+        int to_return = index; //a temp variable
+        remove(index);
+        return to_return;
+    }
+
+    int pop(){
+        int d = data[size-1];
+        return d;
+    }
+
+    // void shrink_to_fit() {}
 };
 //class end
 
@@ -172,8 +195,10 @@ int main() {
     // ArrayList primes({2, 3, 5, 7, 11});
     // primes.print();
     ArrayList example({8,7,6,5,4,3});
-    example.insert(0,2);
+    // example.insert(0,2);
+    // cout << example.pop() << endl;
     example.print();
-
+    example.remove(2);
+    example.print();
 }
 
