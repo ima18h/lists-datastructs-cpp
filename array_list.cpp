@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-
 #include <stdexcept>
+
 using namespace std;
 
 class ArrayList {
@@ -29,11 +29,12 @@ class ArrayList {
     growth_factor = 2; //double when full 
     data = new int[capacity];
 
-
     for (int e: init) {
         append(e);
     }
 
+
+    
     }
     
 
@@ -97,7 +98,25 @@ class ArrayList {
     cout << data[size-1] << "]" << endl;
     
     }
+
+    //support method which throws  
+    void check_index(int index){
+        if ((index >= size) || (index < 0)) {
+            throw out_of_range("Index " + to_string(index) + " is out of range to array with size "
+                               + to_string(size));
+
+        }
+    }
+
+
+    //overwrite the 'int &operator', so that we can use bracketing to set/get later
+    int &operator[](int index) {
+        check_index(index);
+        return data[index];
+    }
 };
+//class end
+
 
 
 bool is_prime(int n) {
