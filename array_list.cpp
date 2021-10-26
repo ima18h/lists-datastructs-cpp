@@ -102,7 +102,7 @@ class ArrayList {
     //support method which throws  
     void check_index(int index){
         if ((index >= size) || (index < 0)) {
-            throw out_of_range("Index " + to_string(index) + " is out of range to array with size "
+            throw out_of_range("Index " + to_string(index) + " is out of range to array list with size "
                                + to_string(size));
 
         }
@@ -113,6 +113,20 @@ class ArrayList {
     int &operator[](int index) {
         check_index(index);
         return data[index];
+    }
+
+
+    void insert(int val, int index) {
+        if (0 <= index < size) { //checking if legal argument
+            size += 1;
+            for (int i = index; i<size+1; i++) {
+                data[i] = data[i+1];
+            }
+            data[index] = val;
+    } else {
+        throw range_error("Capacity full");
+    }
+
     }
 };
 //class end
@@ -155,7 +169,11 @@ void test_arrayList_primes() {
 
 int main() {
 	//  test_arrayList_primes();
-    ArrayList primes({2, 3, 5, 7, 11});
-    primes.print();
+    // ArrayList primes({2, 3, 5, 7, 11});
+    // primes.print();
+    ArrayList example({8,7,6,5,4,3});
+    example.insert(0,2);
+    example.print();
+
 }
 
