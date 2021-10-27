@@ -21,8 +21,7 @@ class ArrayList {
     data = new int[capacity];
     }
 
-    //overloading
-    
+    //overloading for initialized ArrayList objects
     ArrayList(vector<int> init) {
     size = 0;
     capacity = 1;
@@ -31,13 +30,9 @@ class ArrayList {
 
     for (int e: init) {
         append(e);
-    }
-
-
-    
+     }
     }
     
-
 
     //destructor
     ~ArrayList() {
@@ -50,10 +45,6 @@ class ArrayList {
          return size; 
 
     }
-
- 
-    
-    
 
     // c) 
 
@@ -99,7 +90,7 @@ class ArrayList {
     
     }
 
-    //support method which throws  
+    //support method which throws out of range if case
     void check_index(int index){
         if ((index >= size) || (index < 0)) {
             throw out_of_range("Index " + to_string(index) + " is out of range to array list with size "
@@ -116,13 +107,23 @@ class ArrayList {
     }
 
 
-    //not correct results yet
+
     void insert(int val, int index) {
         if (0 <= index < size) { //checking if legal argument
             size += 1;
+            int *data_temp = new int[capacity];
+
+            // filling the new array with the old one, i.e. copying the existing one
+             for (int i=0; i<size; i++) {
+            data_temp[i] = data[i]; 
+             }
+
+            //shift every element from element at index index one to the right 
             for (int i = index; i<size+1; i++) {
-                data[i] = data[i+1];
+                data[i+1] = data_temp[i];
             }
+            
+            //inserting the value at index index
             data[index] = val;
         } 
         else {
@@ -150,7 +151,7 @@ class ArrayList {
     }
 
     int pop(){
-        //method that deletes the last element aas well as returning it
+        //method that deletes the last element as well as returning it
         int d = data[size-1];
         remove(size-1);
         return d;
@@ -281,8 +282,10 @@ int main() {
     
     
     //tests for insert, remove and pop(s)
-    // ArrayList primes({2, 3, 5, 7, 11});
-    // primes.print();
+    ArrayList primes({2, 3, 5, 7, 11});
+    primes.print();
+    primes.insert(0,2);
+    primes.print();
     // ArrayList example({8,7,6,5,4,3});
     // example.print();
     // // example.insert(0,2);
