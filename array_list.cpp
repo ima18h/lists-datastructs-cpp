@@ -140,6 +140,13 @@ class ArrayList {
         //delete in the end
         size -= 1;
 
+       
+        //edit for 1j)
+        double ratio = 0.25;
+        if (size < ratio*capacity) {
+            shrink_to_fit();
+        }
+
     }
     int pop(int index) {
         int to_return = data[index]; //a temp variable
