@@ -140,14 +140,9 @@ class ArrayList {
         //delete in the end
         size -= 1;
 
-       
-        //edit for 1j)
-        double ratio = 0.25;
-        if (size < ratio*capacity) {
-            shrink_to_fit();
-        }
-
     }
+
+    //mthod that deletes a given element as well as returning it
     int pop(int index) {
         int to_return = data[index]; //a temp variable
         remove(index);
@@ -155,7 +150,9 @@ class ArrayList {
     }
 
     int pop(){
+        //method that deletes the last element aas well as returning it
         int d = data[size-1];
+        remove(size-1);
         return d;
     }
 
@@ -174,6 +171,18 @@ class ArrayList {
         // if (capacity/2 >= size) 
         {
             capacity /= 2; 
+        }
+    }
+
+
+    //added functionality for automatic shrinking 1j)
+    //comment out the following method if you are running test_shrink_to_fit(); in 'main', 
+    //i.e. if you do not want automatic shrink
+        
+    void automatic_shrinking(){
+        double ratio = 0.25;
+        if (size < ratio*capacity) {
+            shrink_to_fit();
         }
     }
 };
@@ -247,16 +256,36 @@ void test_shrink_to_fit(){
 
 } 
 
+//function for testing automatic shrinking. just for remove() method, but the same implementation in pop*2
+void test_automatic_shrinking(){
+    ArrayList example({8,7,6,5,4,3});
+    example.print();
+    cout << "---adding elements:" << endl;
+    for (int i = 0; i<1200; i++) {
+        example.append(i);
+    }
+    cout << "---size is:" << example.lenght() << endl;
+    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---removing elements:" << endl;
+     for (int i = 20; i<800; i++) {
+        example.remove(i);
+    }
+    
+    cout << "---size is:" << example.lenght() << endl;
+    cout << "---capacity is:" << example.allocated() << endl;
+} 
+
 int main() {
 	//calling test_ array_list 1e)
     //  test_arrayList_primes();
     
     
-    //tests
+    //tests for insert, remove and pop(s)
     // ArrayList primes({2, 3, 5, 7, 11});
     // primes.print();
     // ArrayList example({8,7,6,5,4,3});
-    // example.insert(0,2);
+    // example.print();
+    // // example.insert(0,2);
     // cout << example.pop() << endl;
     // example.print();
     // example.remove(2); //test remove
@@ -267,7 +296,9 @@ int main() {
     
 
     //calling 1i
-    test_shrink_to_fit();
+    // test_shrink_to_fit();
 
+    //testing automatic shrink (1j)
+    // test_automatic_shrinking();
 }
 
