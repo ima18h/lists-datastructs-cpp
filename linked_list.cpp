@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 
@@ -15,7 +16,16 @@ private:
     int len;
 public:
     LinkedList();
+    LinkedList(vector<int>);
+    ~LinkedList();
+    int& operator[](int);
     int length();
+    void append(int);
+    void print();
+    void remove(int);
+    int pop(int);
+    int pop();
+
 };
 
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0)
