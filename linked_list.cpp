@@ -1,4 +1,11 @@
-//
-// Created by IMAD on 26.10.2021.
-//
+struct Node {
+    int data;
+    struct Node *prev;
+    struct Node *next;
+};
 
+
+int main() {
+
+    return 0;
+}
