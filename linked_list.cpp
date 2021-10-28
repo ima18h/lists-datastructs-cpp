@@ -1,3 +1,7 @@
+#include <iostream>
+using namespace std;
+
+
 struct Node {
     int data;
     struct Node *prev;
@@ -14,7 +18,7 @@ public:
     int length();
 };
 
-LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(1)
+LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0)
 {
 }
 
@@ -25,6 +29,8 @@ int LinkedList::length() {
 
 
 int main(){
-
+    LinkedList list;
+    list.length();
+    cout << list.length() << endl;
     return 0;
 }
