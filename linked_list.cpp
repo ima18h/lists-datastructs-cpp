@@ -29,6 +29,7 @@ class LinkedList {
   Node *head;
   Node *tail;
   int len;
+  Node* node_index(int);
  public:
   LinkedList();
   explicit LinkedList(vector<int> &);
@@ -106,7 +107,6 @@ void LinkedList::append(int intnum) {
     return;
   }
 
-  // Link new node to end of list
   tail->next = new Node(intnum, tail);
   tail = tail->next;
   len += 1;
@@ -120,6 +120,32 @@ void LinkedList::print() {
     current = current->next;
   }
   cout << current->data << "]" << endl;
+}
+void LinkedList::remove(int i) {
+  Node* redacted = node_index(i);
+  redacted->prev->next = redacted->next;
+  redacted->next->prev = redacted->prev;
+  delete redacted;
+  len -= 1;
+}
+Node* LinkedList::node_index(int index) {
+  int half = int(len - 1 / 2);
+  if (index >= len || index < 0) {
+    throw range_error("IndexError: Index out of range");
+  } else if (index > half) {
+    int jumps = len - index;
+    Node *current = tail;
+    for (int i = 0; i < jumps; ++i) {
+      current = current->prev;
+    }
+    return current;
+  } else {
+    Node *current = head;
+    for (int i = 0; i < index; ++i) {
+      current = current->next;
+    }
+    return current;
+  }
 }
 
 // main for testing purposes -----------------------------------------------------------
