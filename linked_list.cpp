@@ -17,10 +17,10 @@ struct Node {
 Node::Node(const int i) : data(i), next(nullptr), prev(nullptr) {
 }
 
-Node::Node(int i, Node *n) : data(i), next(n), prev(nullptr) {
+Node::Node(int i, Node *p) : data(i), prev(p), next(nullptr) {
 }
 
-Node::Node(int i, Node *n, Node *p) : data(i), next(n), prev(p) {
+Node::Node(int i, Node *p, Node *n) : data(i), prev(p), next(n) {
 }
 
 // --------------------------- linkedlist class ---------------------------------
@@ -31,7 +31,7 @@ class LinkedList {
   int len;
  public:
   LinkedList();
-  explicit LinkedList(const vector<int> &);
+  explicit LinkedList(vector<int> &);
   ~LinkedList();
   int &operator[](int);
   int length();
@@ -47,7 +47,17 @@ class LinkedList {
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
-LinkedList::LinkedList(const vector<int> &values) {
+LinkedList::LinkedList(vector<int> &values) {
+  if (values.empty()) {
+  } else if (values.size() == 1) {
+    head = new Node(values[0]);
+  } else {
+    head = new Node(values[0]);
+    tail = new Node(values[1], head);
+    values.erase(values.begin(), values.begin()+1);
+    for (int i: values)
+      tail = new Node(values[i], tail);
+  }
 }
 
 int LinkedList::length() {
