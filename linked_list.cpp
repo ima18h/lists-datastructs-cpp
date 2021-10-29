@@ -49,14 +49,32 @@ LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 
 LinkedList::LinkedList(vector<int> &values) {
   if (values.empty()) {
+    // does this for empty vector work?
+    LinkedList();
   } else if (values.size() == 1) {
     head = new Node(values[0]);
+    len = 1;
   } else {
+    len = int(values.size());
     head = new Node(values[0]);
     tail = new Node(values[1], head);
     values.erase(values.begin(), values.begin()+1);
     for (int i: values)
       tail = new Node(values[i], tail);
+  }
+}
+
+LinkedList::~LinkedList() {
+  if (head == nullptr) {
+  } else if (len == 1) {
+    delete[] head;
+  } else {
+    Node* current;
+    current = head;
+    while (current->next != nullptr) {
+      current = current->next;
+      delete[] head;
+    }
   }
 }
 
