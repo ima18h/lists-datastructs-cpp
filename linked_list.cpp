@@ -100,6 +100,17 @@ int &LinkedList::operator[](int index) {
     return current->data;
   }
 }
+void LinkedList::append(int intnum) {
+  if (head == nullptr) {
+    head = new Node(intnum);
+    return;
+  }
+
+  // Link new node to end of list
+  tail->next = new Node(intnum, tail);
+  tail = tail->next;
+  len += 1;
+}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
