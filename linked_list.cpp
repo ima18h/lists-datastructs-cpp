@@ -111,6 +111,16 @@ void LinkedList::append(int intnum) {
   tail = tail->next;
   len += 1;
 }
+void LinkedList::print() {
+  Node* current = head;
+  cout << "[";
+  while (current->next != nullptr) {
+    cout << current->data;
+    cout << ", ";
+    current = current->next;
+  }
+  cout << current->data << "]" << endl;
+}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
