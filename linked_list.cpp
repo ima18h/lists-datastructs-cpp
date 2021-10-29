@@ -82,22 +82,23 @@ int LinkedList::length() {
   return len;
 }
 int &LinkedList::operator[](int index) {
-  int half = int(len-1 / 2);
-  if(index >= len or index < 0) {
+  int half = int(len - 1 / 2);
+  if (index >= len || index < 0) {
     throw range_error("IndexError: Index out of range");
-  } else if(index > half){
+  } else if (index > half) {
     int jumps = len - index;
-    Node* current = tail;
+    Node *current = tail;
     for (int i = 0; i < jumps; ++i) {
       current = current->prev;
     }
     return current->data;
-  } else{
-    Node* current = head;
+  } else {
+    Node *current = head;
     for (int i = 0; i < index; ++i) {
       current = current->next;
-  }
+    }
     return current->data;
+  }
 }
 
 // main for testing purposes -----------------------------------------------------------
