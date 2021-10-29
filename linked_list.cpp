@@ -83,16 +83,20 @@ int LinkedList::length() {
   return len;
 }
 int &LinkedList::operator[](int index) {
+  // TODO: bug, only [0] index returns the value. rest dont return anything.
   return node_index(index)->data;
 }
 void LinkedList::append(int intnum) {
   if (head == nullptr) {
     head = new Node(intnum);
-    return;
+  } else if (len == 1) {
+    head->next = new Node(intnum, head);
+    tail = head->next;
+  } else{
+    // TODO: some bug after here when 3+ elements in list
+    tail->next = new Node(intnum, tail);
+    tail = tail->next;
   }
-
-  tail->next = new Node(intnum, tail);
-  tail = tail->next;
   len += 1;
 }
 void LinkedList::print() {
@@ -153,9 +157,26 @@ int LinkedList::pop() {
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
-  vector<int> v = {1, 2, 3};
+  vector<int> v = {88, 2, 3};
   LinkedList list(v);
-  cout << list.length() << endl;
+  cout << "length after instantiation with vector 1,2.3: " << list.length() << endl;
+
+  list.append(99);
+  cout << "new length after append: " << list.length() << endl;
+
+  cout << list[0] << endl;
+
+  list.pop();
+  cout << "new length after pop: " << list.length() << endl;
+
+  LinkedList list2;
+  list2.append(69);
+  list2.print();
+  list2.append(96);
+  list2.print();
+  list2.append(100);
+  list2.print();
+
 
   return 0;
 }
