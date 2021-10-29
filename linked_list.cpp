@@ -131,6 +131,15 @@ Node* LinkedList::node_index(int index) {
     return current;
   }
 }
+int LinkedList::pop(int i) {
+  Node* redacted = node_index(i);
+  auto val = redacted->data;
+  redacted->prev->next = redacted->next;
+  redacted->next->prev = redacted->prev;
+  delete redacted;
+  len -= 1;
+  return val;
+}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
