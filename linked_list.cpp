@@ -132,11 +132,21 @@ Node* LinkedList::node_index(int index) {
   }
 }
 int LinkedList::pop(int i) {
+  // TODO: needs some if checks for edge cases
   Node* redacted = node_index(i);
   auto val = redacted->data;
   redacted->prev->next = redacted->next;
   redacted->next->prev = redacted->prev;
   delete redacted;
+  len -= 1;
+  return val;
+}
+int LinkedList::pop() {
+  auto val = tail->data;
+  Node* temp = tail->prev;
+  tail->prev->next = nullptr;
+  delete tail;
+  tail = temp;
   len -= 1;
   return val;
 }
