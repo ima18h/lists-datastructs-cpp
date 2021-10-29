@@ -51,7 +51,7 @@ LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 LinkedList::LinkedList(vector<int> &values) {
   if (values.empty()) {
     // does this for empty vector work?
-    LinkedList();
+    len = 0;
   } else if (values.size() == 1) {
     head = new Node(values[0]);
     len = 1;
@@ -60,8 +60,8 @@ LinkedList::LinkedList(vector<int> &values) {
     head = new Node(values[0]);
     tail = new Node(values[1], head);
     values.erase(values.begin(), values.begin()+1);
-    for (int i: values)
-      tail = new Node(values[i], tail);
+    for (int val: values)
+      tail = new Node(val, tail);
   }
 }
 
@@ -153,12 +153,9 @@ int LinkedList::pop() {
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
-  LinkedList list;
-  list.length();
+  vector<int> v = {1, 2, 3};
+  LinkedList list(v);
   cout << list.length() << endl;
 
-  for (int i = 0; i < 1; ++i) {
-    cout << i << "\n";
-  }
   return 0;
 }
