@@ -6,18 +6,18 @@ using namespace std;
 
 class ArrayList {
     private:
-        int capacity; 
+        int capacity;
         int *data;
         int growth_factor;
 
     public:
         int size; //initial size 0
-        
+
     //constructor
     ArrayList() {
     size = 0;
     capacity = 1;
-    growth_factor = 2; //double when full 
+    growth_factor = 2; //double when full
     data = new int[capacity];
     }
 
@@ -25,14 +25,14 @@ class ArrayList {
     ArrayList(vector<int> init) {
     size = 0;
     capacity = 1;
-    growth_factor = 2; //double when full 
+    growth_factor = 2; //double when full
     data = new int[capacity];
 
     for (int e: init) {
         append(e);
      }
     }
-    
+
 
     //destructor
     ~ArrayList() {
@@ -42,11 +42,11 @@ class ArrayList {
 
     int lenght(){
          // return nb. of elements in the object;
-         return size; 
+         return size;
 
     }
 
-    // c) 
+    // c)
 
     void append(int n){
         if (size < capacity) {
@@ -54,8 +54,8 @@ class ArrayList {
         size += 1;
         }
         else {
-            //call the below method 
-            resize(); 
+            //call the below method
+            resize();
             //then do the desired task
             data[size] = n;
             size += 1;
@@ -65,29 +65,29 @@ class ArrayList {
     void resize(){
         // All0cate new array with new_capacity = 2 * capacity
         capacity *= growth_factor;
-        
+
         //create a new data structure with the double capacity of the existing one
-        int *data_new = new int[capacity]; 
-        
+        int *data_new = new int[capacity];
+
         // filling the new array with the old one, i.e. copying the existing one
         for (int i=0; i<size; i++) {
-        data_new[i] = data[i]; 
+        data_new[i] = data[i];
     }
         //delete the existing one and reassign the data-pointer
         delete[] data;
         data = data_new;
     }
 
-    //d - pretty printing 
+    //d - pretty printing
     //Add a public method void print() that prints out the contents of the list in order on a single line.
     void print(){
         cout << "[";
         for (int i=0; i<size-1; i++) {
-		cout << data[i] <<" "; 
-        
+		cout << data[i] <<" ";
+
     }
     cout << data[size-1] << "]" << endl;
-    
+
     }
 
     //support method which throws out of range if case
@@ -115,23 +115,23 @@ class ArrayList {
 
             // filling the new array with the old one, i.e. copying the existing one
              for (int i=0; i<size; i++) {
-            data_temp[i] = data[i]; 
+            data_temp[i] = data[i];
              }
 
-            //shift every element from element at index index one to the right 
+            //shift every element from element at index index one to the right
             for (int i = index; i<size+1; i++) {
                 data[i+1] = data_temp[i];
             }
-            
+
             //inserting the value at index index
             data[index] = val;
-        } 
+        }
         else {
         throw range_error("Capacity full");
         }
     }
 
-    
+
     void remove(int index) {
         //shift to left from end to index
         for(int i=index;i<size-1;++i){
@@ -163,23 +163,23 @@ class ArrayList {
     int allocated(){
          // return capacity of the object;
          int allocated = capacity;
-         return allocated; 
+         return allocated;
 
     }
     void shrink_to_fit() {
         //do something if capacity can be reduced without being less than size (capazity being 2^n)
         while (capacity/2 >= size)
-        // if (capacity/2 >= size) 
+        // if (capacity/2 >= size)
         {
-            capacity /= 2; 
+            capacity /= 2;
         }
     }
 
 
     //added functionality for automatic shrinking 1j)
-    //comment out the following method if you are running test_shrink_to_fit(); in 'main', 
+    //comment out the following method if you are running test_shrink_to_fit(); in 'main',
     //i.e. if you do not want automatic shrink
-        
+
     void automatic_shrinking(){
         double ratio = 0.25;
         if (size < ratio*capacity) {
@@ -195,7 +195,7 @@ bool is_prime(int n) {
     if (n == 1) {
         return false;
     }
-    
+
     for (int d=2; d<n; d++) {
         if (n % d == 0) {
             return false;
@@ -204,7 +204,7 @@ bool is_prime(int n) {
     return true;
 }
 
-//1e test function 
+//1e test function
 void test_arrayList_primes() {
     ArrayList primes;
 
@@ -212,7 +212,7 @@ void test_arrayList_primes() {
     int i = 0;
     int j = 0; //tolerance, max nb. of primes
     while (j < 10) {
-    
+
        bool p = is_prime(i);
 
         if (p) {
@@ -227,7 +227,7 @@ void test_arrayList_primes() {
 //1i test function
 void test_shrink_to_fit(){
     ArrayList example({8,7,6,5,4,3,2,1});
-    
+
     for (int i = 0; i<1200; i++) {
         example.append(i);
     }
@@ -236,9 +236,9 @@ void test_shrink_to_fit(){
 
     cout << "---size is:" << example.lenght() << endl;
     cout << "---capacity is:" << example.allocated() << endl;
-    
+
     cout << "---DELETING elements" << endl;
-    
+
     for (int i = 20; i<800; i++) {
         example.remove(i);
     }
@@ -246,7 +246,7 @@ void test_shrink_to_fit(){
 
     cout << "---size is:" << example.lenght() << endl;
     cout << "---capacity is:" << example.allocated() << endl;
-    
+
     example.shrink_to_fit();
 
     cout << "-SHRINKING" << endl;
@@ -255,7 +255,7 @@ void test_shrink_to_fit(){
     cout << "---capacity is:" << example.allocated() << endl;
 
 
-} 
+}
 
 //function for testing automatic shrinking. just for remove() method, but the same implementation in pop*2
 void test_automatic_shrinking(){
@@ -271,37 +271,36 @@ void test_automatic_shrinking(){
      for (int i = 20; i<800; i++) {
         example.remove(i);
     }
-    
+
     cout << "---size is:" << example.lenght() << endl;
     cout << "---capacity is:" << example.allocated() << endl;
-} 
+}
 
 int main() {
 	//calling test_ array_list 1e)
-    //  test_arrayList_primes();
-    
-    
+     test_arrayList_primes();
+
+
     //tests for insert, remove and pop(s)
     ArrayList primes({2, 3, 5, 7, 11});
     primes.print();
     primes.insert(0,2);
     primes.print();
-    // ArrayList example({8,7,6,5,4,3});
-    // example.print();
-    // // example.insert(0,2);
-    // cout << example.pop() << endl;
-    // example.print();
-    // example.remove(2); //test remove
-    // cout << example.pop(2) << endl; //test pop(int)
-    // cout << example.pop() << endl;//test pop()
-    // example.print();
-    
-    
+    ArrayList example({8,7,6,5,4,3});
+    example.print();
+    // example.insert(0,2);
+    cout << example.pop() << endl;
+    example.print();
+    example.remove(2); //test remove
+    cout << example.pop(2) << endl; //test pop(int)
+    cout << example.pop() << endl;//test pop()
+    example.print();
 
-    //calling 1i
-    // test_shrink_to_fit();
 
-    //testing automatic shrink (1j)
-    // test_automatic_shrinking();
+
+    // calling 1i
+    test_shrink_to_fit();
+
+    // testing automatic shrink (1j)
+    test_automatic_shrinking();
 }
-
