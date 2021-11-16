@@ -3,7 +3,8 @@ Project 2 for erlingpv (erlingpv@mail.uio.no) and imadha (imadha@mail.uio.no)
 
 
 
-Part 1: Used VSC to build/compile into executable. In our understanding, we managed to complete the problem correctly. 
+#Part 1: 
+Used VSC to build/compile into executable. In our understanding, we managed to complete the problem correctly. 
 At least, it compiles and run, as well as providing promising and expected functionality/results. 
 Perhaps code style could be better. Made test functions for the shrink-methods and 1e) which we call from the 'main' block. 
 Besides that, we had some simple tests in main-block (just for us, since not asked for besides the aforementioned ones.) Furthermore,
@@ -15,7 +16,7 @@ we were not sure originally).
 
 
 
-Part 3a) - Big O  
+#Part 3a) - Big O  
 
 --ARRAYList--
 Get element i by index: In an ArrayList, this is just operation - you simply just access the element/index desired.
@@ -51,39 +52,49 @@ Depending on the loop: for printing just one number yields the same as accessing
 But printing the list itself (or arbitrary size of it) yields Big O(1) * Big O(n) = Big O(n)
 
 
---LinkedList--
-Get element i by index: 
-This is different from the ArrayList: As we here are facing a list were evertyhing is 'chained together', we 
-now must traverse the whole list to accescc our desired element/index. Thus Big O(n)
-
-Insert at front: 
--Independent of the size of the list, since we just add an element that point to the previous head. 
-Independent of n means constant, i.e. Big O(1).
-
-Insert at back (aka append): 
--By utilizing the tail-pointer, we have a neat way of reaching the end. Hence, this also scales as Big O(1)
-
-Insert into middle of list
--Same argument as for arraylist, Big O(n)
-
-Removing yields the same number of operations as inserting
-Remove element from front:
--Big O(1). Same argument as for inserting
-
-Remove element from back:
--Analogously to the inserting, i.e. Big O(1)
-
-Removing in the middle
--Same argument as for arraylist, Big O(n)
-
-Print
-for an n-sized list, printing it yields 'numeber of iterations' * 'cost of acceccing the elemnts' = 
-Big O(n) * Big O(n) = Big O(n^2)  
+##--LinkedList--
+Performance will be worse for small lists compared to big ones because of overhead.
+- Get element i by index:  
+Our linked list contains nodes that are, well, linked together.
+As the list gets bigger it will go towards O(n / 2), since we also have tail.
 
 
+- Insert at front:  
+Independent of list size, just insert and link. 
+Independent of n means constant, i.e. O(1). 
 
 
-part 4: If n=67 and k=7, the best location in the circle would be 61, as this would make you be the last man standing.
+- Insert at back (aka append):  
+Same as "Insert at front" because tail pointer. O(1). 
+
+
+- Insert into middle of list:  
+Same as indexing. O(n / 2). 
+
+
+- Removing yields the same number of operations as inserting. 
+
+
+- Remove element from front:  
+O(1). Same argument as inserting. 
+
+
+- Remove element from back:
+Analogously to appending, i.e. O(1). 
+
+
+- Removing in the middle
+Same as indexing, worst case is O(n / 2). 
+
+
+- Print  
+I think it's O(n) because accessing the elements is O(1) when we already have the previous pointer. 
+
+
+
+
+# part 4: 
+If n=67 and k=7, the best location in the circle would be 61, as this would make you be the last man standing.
 (derived by calculator). 
 
 
