@@ -41,7 +41,7 @@ class LinkedList {
   void remove(int);
   int pop(int);
   int pop();
-
+  void insert(int val, int index);
 };
 
 // linked list method definitions, implementation ---------------------------------
@@ -49,6 +49,7 @@ class LinkedList {
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
+// constructor takes a vector and makes a linked lsit from the values
 LinkedList::LinkedList(vector<int> &values) {
   // this constructor could probably just use append() instead
   if (values.empty()) {
@@ -68,7 +69,6 @@ LinkedList::LinkedList(vector<int> &values) {
     for (int val: values) {
       tail->next = new Node(val, tail);
       tail = tail->next;
-      cout << "tail next:" <<tail << endl;
     }
   }
 }
@@ -161,6 +161,17 @@ int LinkedList::pop() {
   len -= 1;
   return val;
 }
+// inserts after given node index
+void LinkedList::insert(int val, int index) {
+  if (index == len-1)
+    append(val);
+  else {
+    Node *insert_here = node_index(index);
+    insert_here->next->prev = new Node(val, insert_here, insert_here->next);
+    insert_here->next = insert_here->next->prev;
+    len += 1;
+  }
+}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
@@ -194,6 +205,10 @@ int main() {
   list.remove(index);
   list.print();
   cout << "new length after remove at index " << index << ": " << list.length() << endl;
+
+  list.insert(21, index-1);
+  list.print();
+  cout << "new length after insert at index " << index-1 << ": " << list.length() << endl;
 
   return 0;
 }
