@@ -66,15 +66,15 @@ LinkedList::LinkedList(vector<int> &values) {
 }
 
 LinkedList::~LinkedList() {
-  if (head == nullptr) {
+  if (len == 0) {
   } else if (len == 1) {
     delete[] head;
   } else {
-    Node* current;
-    current = head;
-    while (current->next != nullptr) {
-      current = current->next;
-      delete[] head;
+    Node* current = tail;
+    for (int i = 0; i < len; ++i) {
+      current = current->prev;
+      delete[] tail;
+      tail = current;
     }
   }
 }
@@ -93,7 +93,6 @@ void LinkedList::append(int intnum) {
     head->next = new Node(intnum, head);
     tail = head->next;
   } else{
-    // TODO: some bug after here when 3+ elements in list
     tail->next = new Node(intnum, tail);
     tail = tail->next;
   }
@@ -175,6 +174,7 @@ int main() {
   list2.append(96);
   list2.print();
   list2.append(100);
+  list2.append(111);
   list2.print();
 
 
