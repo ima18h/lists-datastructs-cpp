@@ -162,6 +162,7 @@ int LinkedList::pop() {
   return val;
 }
 // inserts after given node index
+// TODO: change it so insert is before the index element (already have append)
 void LinkedList::insert(int val, int index) {
   if (index == len-1)
     append(val);
