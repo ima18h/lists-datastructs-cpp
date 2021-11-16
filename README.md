@@ -52,7 +52,7 @@ Depending on the loop: for printing just one number yields the same as accessing
 But printing the list itself (or arbitrary size of it) yields Big O(1) * Big O(n) = Big O(n)
 
 
-##--LinkedList--
+##LinkedList
 Performance will be worse for small lists compared to big ones because of overhead.
 - Get element i by index:  
 Our linked list contains nodes that are, well, linked together.
@@ -101,7 +101,6 @@ If n=67 and k=7, the best location in the circle would be 61, as this would make
 
 
 
-Unfortuneately, we did not had enough time to finish this time. We hope to get a second attempt, and will finish the project then. 
-We got 
+Unfortuneately, we were not able to finish part 4. 
 
 
