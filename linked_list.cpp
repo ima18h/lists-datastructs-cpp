@@ -166,24 +166,34 @@ int LinkedList::pop() {
 int main() {
   vector<int> v = {88, 2, 3};
   LinkedList list(v);
-  cout << "length after instantiation with vector 88,2.3: " << list.length() << endl;
+  list.print();
+  cout << "length after instantiation with vector [88,2.3]: " << list.length() << endl;
 
-  //list.append(99);
-  //cout << "new length after append: " << list.length() << endl;
+  list.append(99);
+  list.print();
+  cout << "new length after append: " << list.length() << endl;
 
-  cout << list[2] << endl;
+  cout << "list at index 2: " << list[2] << endl;
 
-  //list.pop();
-  //cout << "new length after pop: " << list.length() << endl;
+  list.pop();
+  list.print();
+  cout << "new length after pop: " << list.length() << endl;
 
-  LinkedList list2;
-  list2.append(69);
-  list2.print();
-  list2.append(96);
-  list2.print();
-  list2.append(100);
-  list2.append(111);
-  list2.print();
+  list.append(69);
+  list.append(96);
+  list.append(100);
+  list.append(111);
+  cout << "new length after 4 appends: " << list.length() << endl;
+  list.print();
+
+  int index = list.length()/2;
+  int popped = list.pop(index);
+  list.print();
+  cout << "new length after pop at index " << index << ": " << list.length() << ", which returns: " << popped << endl;
+
+  list.remove(index);
+  list.print();
+  cout << "new length after remove at index " << index << ": " << list.length() << endl;
 
   return 0;
 }
