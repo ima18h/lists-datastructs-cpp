@@ -35,7 +35,7 @@ class LinkedList {
   explicit LinkedList(vector<int> &);
   ~LinkedList();
   int &operator[](int);
-  int length();
+  int length() const;
   void append(int);
   void print();
   void remove(int);
@@ -49,6 +49,7 @@ LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
 LinkedList::LinkedList(vector<int> &values) {
+  // TODO: bug, i think only first element is linked at head
   if (values.empty()) {
     // does this for empty vector work?
     len = 0;
@@ -79,11 +80,10 @@ LinkedList::~LinkedList() {
   }
 }
 
-int LinkedList::length() {
+int LinkedList::length() const {
   return len;
 }
 int &LinkedList::operator[](int index) {
-  // TODO: bug, only [0] index returns the value. rest dont return anything.
   return node_index(index)->data;
 }
 void LinkedList::append(int intnum) {
@@ -116,11 +116,11 @@ void LinkedList::remove(int i) {
   len -= 1;
 }
 Node* LinkedList::node_index(int index) {
-  int half = int(len - 1 / 2);
+  int half = len / 2;
   if (index >= len || index < 0) {
     throw range_error("IndexError: Index out of range");
   } else if (index > half) {
-    int jumps = len - index;
+    int jumps = (len - 1) - index;
     Node *current = tail;
     for (int i = 0; i < jumps; ++i) {
       current = current->prev;
@@ -176,7 +176,6 @@ int main() {
   list2.append(100);
   list2.append(111);
   list2.print();
-
 
   return 0;
 }
