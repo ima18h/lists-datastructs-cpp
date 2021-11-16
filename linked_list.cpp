@@ -45,24 +45,31 @@ class LinkedList {
 };
 
 // linked list method definitions, implementation ---------------------------------
+// constructors, destructors ---------------------------------
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
 LinkedList::LinkedList(vector<int> &values) {
-  // TODO: bug, i think only first element is linked at head
+  // this constructor could probably just use append() instead
   if (values.empty()) {
-    // does this for empty vector work?
     len = 0;
+    head = nullptr;
+    tail = nullptr;
   } else if (values.size() == 1) {
     head = new Node(values[0]);
     len = 1;
+    tail = nullptr;
   } else {
     len = int(values.size());
     head = new Node(values[0]);
-    tail = new Node(values[1], head);
-    values.erase(values.begin(), values.begin()+1);
-    for (int val: values)
-      tail = new Node(val, tail);
+    head->next = new Node(values[1], head);
+    tail = head->next;
+    values.erase(values.begin(), values.begin()+2);
+    for (int val: values) {
+      tail->next = new Node(val, tail);
+      tail = tail->next;
+      cout << "tail next:" <<tail << endl;
+    }
   }
 }
 
@@ -80,6 +87,7 @@ LinkedList::~LinkedList() {
   }
 }
 
+// methods ---------------------------------
 int LinkedList::length() const {
   return len;
 }
@@ -158,15 +166,15 @@ int LinkedList::pop() {
 int main() {
   vector<int> v = {88, 2, 3};
   LinkedList list(v);
-  cout << "length after instantiation with vector 1,2.3: " << list.length() << endl;
+  cout << "length after instantiation with vector 88,2.3: " << list.length() << endl;
 
-  list.append(99);
-  cout << "new length after append: " << list.length() << endl;
+  //list.append(99);
+  //cout << "new length after append: " << list.length() << endl;
 
-  cout << list[0] << endl;
+  cout << list[2] << endl;
 
-  list.pop();
-  cout << "new length after pop: " << list.length() << endl;
+  //list.pop();
+  //cout << "new length after pop: " << list.length() << endl;
 
   LinkedList list2;
   list2.append(69);
