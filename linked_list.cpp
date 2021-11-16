@@ -81,7 +81,7 @@ LinkedList::~LinkedList() {
     Node* current = tail;
     for (int i = 0; i < len; ++i) {
       current = current->prev;
-      delete[] tail;
+      delete tail;
       tail = current;
     }
   }
