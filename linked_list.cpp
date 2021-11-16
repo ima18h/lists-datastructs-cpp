@@ -35,55 +35,63 @@ class LinkedList {
   explicit LinkedList(vector<int> &);
   ~LinkedList();
   int &operator[](int);
-  int length();
+  int length() const;
   void append(int);
   void print();
   void remove(int);
   int pop(int);
   int pop();
-
+  void insert(int val, int index);
 };
 
 // linked list method definitions, implementation ---------------------------------
+// constructors, destructors ---------------------------------
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
+// constructor takes a vector and makes a linked lsit from the values
 LinkedList::LinkedList(vector<int> &values) {
+  // this constructor could probably just use append() instead
   if (values.empty()) {
-    // does this for empty vector work?
     len = 0;
+    head = nullptr;
+    tail = nullptr;
   } else if (values.size() == 1) {
     head = new Node(values[0]);
     len = 1;
+    tail = nullptr;
   } else {
     len = int(values.size());
     head = new Node(values[0]);
-    tail = new Node(values[1], head);
-    values.erase(values.begin(), values.begin()+1);
-    for (int val: values)
-      tail = new Node(val, tail);
-  }
-}
-
-LinkedList::~LinkedList() {
-  if (head == nullptr) {
-  } else if (len == 1) {
-    delete[] head;
-  } else {
-    Node* current;
-    current = head;
-    while (current->next != nullptr) {
-      current = current->next;
-      delete[] head;
+    head->next = new Node(values[1], head);
+    tail = head->next;
+    values.erase(values.begin(), values.begin()+2);
+    for (int val: values) {
+      tail->next = new Node(val, tail);
+      tail = tail->next;
     }
   }
 }
 
-int LinkedList::length() {
+LinkedList::~LinkedList() {
+  if (len == 0) {
+  } else if (len == 1) {
+    delete[] head;
+  } else {
+    Node* current = tail;
+    for (int i = 0; i < len; ++i) {
+      current = current->prev;
+      delete tail;
+      tail = current;
+    }
+  }
+}
+
+// methods ---------------------------------
+int LinkedList::length() const {
   return len;
 }
 int &LinkedList::operator[](int index) {
-  // TODO: bug, only [0] index returns the value. rest dont return anything.
   return node_index(index)->data;
 }
 void LinkedList::append(int intnum) {
@@ -93,7 +101,6 @@ void LinkedList::append(int intnum) {
     head->next = new Node(intnum, head);
     tail = head->next;
   } else{
-    // TODO: some bug after here when 3+ elements in list
     tail->next = new Node(intnum, tail);
     tail = tail->next;
   }
@@ -117,11 +124,11 @@ void LinkedList::remove(int i) {
   len -= 1;
 }
 Node* LinkedList::node_index(int index) {
-  int half = int(len - 1 / 2);
+  int half = len / 2;
   if (index >= len || index < 0) {
     throw range_error("IndexError: Index out of range");
   } else if (index > half) {
-    int jumps = len - index;
+    int jumps = (len - 1) - index;
     Node *current = tail;
     for (int i = 0; i < jumps; ++i) {
       current = current->prev;
@@ -154,29 +161,54 @@ int LinkedList::pop() {
   len -= 1;
   return val;
 }
+// inserts after given node index
+void LinkedList::insert(int val, int index) {
+  if (index == len-1)
+    append(val);
+  else {
+    Node *insert_here = node_index(index);
+    insert_here->next->prev = new Node(val, insert_here, insert_here->next);
+    insert_here->next = insert_here->next->prev;
+    len += 1;
+  }
+}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
   vector<int> v = {88, 2, 3};
   LinkedList list(v);
-  cout << "length after instantiation with vector 1,2.3: " << list.length() << endl;
+  list.print();
+  cout << "length after instantiation with vector [88,2.3]: " << list.length() << endl;
 
   list.append(99);
+  list.print();
   cout << "new length after append: " << list.length() << endl;
 
-  cout << list[0] << endl;
+  cout << "list at index 2: " << list[2] << endl;
 
   list.pop();
+  list.print();
   cout << "new length after pop: " << list.length() << endl;
 
-  LinkedList list2;
-  list2.append(69);
-  list2.print();
-  list2.append(96);
-  list2.print();
-  list2.append(100);
-  list2.print();
+  list.append(69);
+  list.append(96);
+  list.append(100);
+  list.append(111);
+  cout << "new length after 4 appends: " << list.length() << endl;
+  list.print();
 
+  int index = list.length()/2;
+  int popped = list.pop(index);
+  list.print();
+  cout << "new length after pop at index " << index << ": " << list.length() << ", which returns: " << popped << endl;
+
+  list.remove(index);
+  list.print();
+  cout << "new length after remove at index " << index << ": " << list.length() << endl;
+
+  list.insert(21, index-1);
+  list.print();
+  cout << "new length after insert at index " << index-1 << ": " << list.length() << endl;
 
   return 0;
 }
