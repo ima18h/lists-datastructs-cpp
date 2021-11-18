@@ -134,9 +134,10 @@ void CircLinkedList::remove(int i) {
   len -= 1;
 }
 Node* CircLinkedList::node_index(int index) {
-  int half = len / 2;
-  if (index >= len || index < 0) {
-    throw range_error("IndexError: Index out of range");
+  // TODO: implement for circular
+  int half = len / 4;
+  if (len == 0) {
+    throw range_error("IndexError: list is empty");
   } else if (index > half) {
     int jumps = (len - 1) - index;
     Node *current = tail;
@@ -163,10 +164,11 @@ int CircLinkedList::pop(int i) {
   return val;
 }
 int CircLinkedList::pop() {
-  auto val = tail->data;
-  Node* temp = tail->prev;
-  tail->prev->next = nullptr;
-  delete tail;
+  // not working
+  auto val = head->prev->data;
+  Node* temp = head->prev->prev;
+  head->prev->prev->next = head;
+  delete head->prev;
   tail = temp;
   len -= 1;
   return val;
@@ -196,8 +198,8 @@ int main() {
   cout << "new length after append: " << list.length() << endl;
 
   cout << "list at index 3: " << list[3] << endl;
-/*
-  list.pop();
+
+  //list.pop();
   list.print();
   cout << "new length after pop: " << list.length() << endl;
 
@@ -220,7 +222,7 @@ int main() {
   list.insert(21, index-1);
   list.print();
   cout << "new length after insert at index " << index-1 << ": " << list.length() << endl;
-  */
+
 
   return 0;
 }
