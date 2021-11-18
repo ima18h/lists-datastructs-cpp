@@ -53,10 +53,10 @@ But printing the list itself (or arbitrary size of it) yields Big O(1) * Big O(n
 
 
 ## LinkedList
-Performance will be worse for small lists compared to big ones because of overhead.
+Performance will be worse for small lists compared to big ones because of overhead. 
 - Get element i by index:  
-Our linked list contains nodes that are, well, linked together.
-As the list gets bigger it will go towards O(n / 2) for the worst case, since we also have tail.
+Our linked list contains nodes that are, well, linked together. 
+As the list gets bigger it will go towards O(n / 2) = O(n) for the worst case. 
 
 
 - Insert at front:  
@@ -69,22 +69,22 @@ Same as "Insert at front" because tail pointer. O(1).
 
 
 - Insert into middle of list:  
-Same as indexing worst case. O(n / 2). 
+Same as indexing worst case. O(n / 2) = O(n). 
 
 
-- Removing, approximately the same as indexing. O(n / 2). 
+- Removing, approximately the same as indexing. O(n). 
 
 
 - Remove element from front:  
-O(1). Same argument as inserting. 
+O(1). Same as inserting. 
 
 
-- Remove element from back:
-Analogously to appending, i.e. O(1). 
+- Remove element from back:  
+Analogous to appending, i.e. O(1). 
 
 
 - Removing in the middle
-Same as the indexing worst case, O(n / 2). 
+Same as the indexing worst case, O(n). 
 
 
 - Print  
