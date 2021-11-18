@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <chrono>  // for high_resolution_clock
-#include <fstream>  // for ofstream
-#include <stdexcept>  // for runtime_error
 using namespace std;
-using namespace std::chrono;
 
 // node, structure ---------------------------------------------------------------
 struct Node {
@@ -178,9 +174,8 @@ void LinkedList::insert(int val, int index) {
   }
 }
 
-
-//test function
-void test_linkedList() {
+// main for testing purposes -----------------------------------------------------------
+int main() {
   vector<int> v = {88, 2, 3};
   LinkedList list(v);
   list.print();
@@ -215,80 +210,6 @@ void test_linkedList() {
   list.insert(21, index-1);
   list.print();
   cout << "new length after insert at index " << index-1 << ": " << list.length() << endl;
-}
 
-void time_get_method() {
-cout << "\nLinked list - get \n";
-    ofstream ofs{"linked_list_get.txt"};
-    if (!ofs) {
-        throw runtime_error("Unable to open file");
-    }
-    // Number of times we want to get the element
-    int runs = 1000;
-    for (int N = 100; N < 1E6; N *= 10) {
-
-        // Append N elements
-        LinkedList ll{};
-        for (int i = 0; i < N; i++) {
-            ll.append(i);
-        }
-
-        // Start the clock
-        auto start = high_resolution_clock::now();
-        // Get value in the middle
-        for (int run = 0; run < runs; run++) {
-            auto value = ll[N / 2];
-        }
-
-        // Stop the clock
-        auto stop = high_resolution_clock::now();
-        // Compute the time difference in microseconds
-        auto duration = duration_cast<microseconds>(stop - start);
-        // Print the results in the console
-        cout << N << " " << duration.count() / (double) runs << "\n";
-        // Save the result to a file
-        ofs << N << " " << duration.count() / (double) runs << "\n";
-    }
-
-}
-
-
-// void time_insert_front_method(){
- //insert front
-    // cout << "Linked list - insert front \n";
-    // ofstream ofs{"linked_list_insert.txt"};
-    // if (!ofs) {
-    //     throw runtime_error("Unable to open file");
-    // }
-    // for (int N = 100; N < 1E6; N *= 10) {
-    //     auto start = high_resolution_clock::now();
-    //     LinkedList ll{};
-    //     for (int i = 0; i < N; i++) {
-    //         ll.insert(i, 0);
-    //     }
-
-    //     auto stop = high_resolution_clock::now();
-    //     auto duration = duration_cast<microseconds>(stop - start);
-    //     cout << N << " " << duration.count() / (double) N << "\n";
-    //     ofs << N << " " << duration.count() / (double) N << "\n";
-    // }
-// }
-
-
-// main for testing purposes -----------------------------------------------------------
-int main() {
-
-  // test_linkedList();
-
-  time_get_method();
-  
-  // time_insert_front_method();
-  
-  
-  //part 3
-
-  
-  
-    
   return 0;
 }
