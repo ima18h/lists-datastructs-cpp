@@ -3,7 +3,7 @@ Project 2 for erlingpv (erlingpv@mail.uio.no) and imadha (imadha@mail.uio.no)
 
 
 
-#Part 1: 
+# Part 1: 
 Used VSC to build/compile into executable. In our understanding, we managed to complete the problem correctly. 
 At least, it compiles and run, as well as providing promising and expected functionality/results. 
 Perhaps code style could be better. Made test functions for the shrink-methods and 1e) which we call from the 'main' block. 
@@ -16,7 +16,7 @@ we were not sure originally).
 
 
 
-#Part 3a) - Big O  
+# Part 3a) - Big O  
 
 --ARRAYList--
 Get element i by index: In an ArrayList, this is just operation - you simply just access the element/index desired.
@@ -52,11 +52,11 @@ Depending on the loop: for printing just one number yields the same as accessing
 But printing the list itself (or arbitrary size of it) yields Big O(1) * Big O(n) = Big O(n)
 
 
-##LinkedList
+## LinkedList
 Performance will be worse for small lists compared to big ones because of overhead.
 - Get element i by index:  
 Our linked list contains nodes that are, well, linked together.
-As the list gets bigger it will go towards O(n / 2), since we also have tail.
+As the list gets bigger it will go towards O(n / 2) for the worst case, since we also have tail.
 
 
 - Insert at front:  
@@ -69,10 +69,10 @@ Same as "Insert at front" because tail pointer. O(1).
 
 
 - Insert into middle of list:  
-Same as indexing. O(n / 2). 
+Same as indexing worst case. O(n / 2). 
 
 
-- Removing yields the same number of operations as inserting. 
+- Removing, approximately the same as indexing. O(n / 2). 
 
 
 - Remove element from front:  
@@ -84,11 +84,11 @@ Analogously to appending, i.e. O(1).
 
 
 - Removing in the middle
-Same as indexing, worst case is O(n / 2). 
+Same as the indexing worst case, O(n / 2). 
 
 
 - Print  
-I think it's O(n) because accessing the elements is O(1) when we already have the previous pointer. 
+I think it's O(n) because accessing the elements becomes O(1) when we already have the pointer. 
 
 
 
