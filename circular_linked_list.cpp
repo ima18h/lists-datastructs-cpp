@@ -27,6 +27,8 @@ Node::Node(int i, Node *p, Node *n) : data(i), prev(p), next(n) {
 class CircLinkedList {
  private:
   Node *head;
+  // tail for circular list is other side of circle. if even number, it should be closer to "front"
+  // don't have time to implement this right now though
   Node *tail;
   int len;
   Node* node_index(int);
@@ -57,7 +59,7 @@ CircLinkedList::CircLinkedList(vector<int> &values) {
     head = nullptr;
     tail = nullptr;
   } else if (values.size() == 1) {
-    head = new Node(values[0]);
+    head = new Node(values[0], head, head);
     len = 1;
     tail = nullptr;
   } else {
@@ -70,16 +72,20 @@ CircLinkedList::CircLinkedList(vector<int> &values) {
       tail->next = new Node(val, tail);
       tail = tail->next;
     }
+    head->prev = tail;
+    tail->next = head;
+    // TODO: optimize setting tail. can do for loop, set tail, then new for loop
+    tail = this->node_index(len / 2);
   }
 }
 
 CircLinkedList::~CircLinkedList() {
   if (len == 0) {
   } else if (len == 1) {
-    delete[] head;
+    delete head;
   } else {
     Node* current = tail;
-    for (int i = 0; i < len; ++i) {
+    for (int i = 0; i < len-1; ++i) {
       current = current->prev;
       delete tail;
       tail = current;
@@ -96,20 +102,23 @@ int &CircLinkedList::operator[](int index) {
 }
 void CircLinkedList::append(int intnum) {
   if (head == nullptr) {
-    head = new Node(intnum);
+    head = new Node(intnum, head, head);
   } else if (len == 1) {
     head->next = new Node(intnum, head);
     tail = head->next;
+    head->prev = tail;
   } else{
-    tail->next = new Node(intnum, tail);
+    head->prev = new Node(intnum, head->prev->prev, head);
     tail = tail->next;
+    // TODO: optimize setting tail.
+    tail = this->node_index(len / 2);
   }
   len += 1;
 }
 void CircLinkedList::print() {
   Node* current = head;
   cout << "[";
-  while (current->next != nullptr) {
+  for (int i = 0; i < len-1; ++i) {
     cout << current->data;
     cout << ", ";
     current = current->next;
@@ -185,8 +194,8 @@ int main() {
   list.print();
   cout << "new length after append: " << list.length() << endl;
 
-  cout << "list at index 2: " << list[2] << endl;
-
+  cout << "list at index 2: " << list[0] << endl;
+/*
   list.pop();
   list.print();
   cout << "new length after pop: " << list.length() << endl;
@@ -210,6 +219,7 @@ int main() {
   list.insert(21, index-1);
   list.print();
   cout << "new length after insert at index " << index-1 << ": " << list.length() << endl;
+  */
 
   return 0;
 }
