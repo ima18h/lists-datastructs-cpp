@@ -3,7 +3,7 @@ Project 2 for erlingpv (erlingpv@mail.uio.no) and imadha (imadha@mail.uio.no)
 
 
 
-# Part 1: 
+## Part 1: 
 Used VSC to build/compile into executable. In our understanding, we managed to complete the problem correctly. 
 At least, it compiles and run, as well as providing promising and expected functionality/results. 
 Perhaps code style could be better. Made test functions for the shrink-methods and 1e) which we call from the 'main' block. 
@@ -16,9 +16,9 @@ we were not sure originally).
 
 
 
-# Part 3a) - Big O  
+## Part 3a) - Big O  
 
---ARRAYList--
+# ARRAYList
 Get element i by index: In an ArrayList, this is just operation - you simply just access the element/index desired.
 Thus we hav Big O(1)
 
@@ -52,7 +52,7 @@ Depending on the loop: for printing just one number yields the same as accessing
 But printing the list itself (or arbitrary size of it) yields Big O(1) * Big O(n) = Big O(n)
 
 
-## LinkedList
+# LinkedList
 Performance will be worse for small lists compared to big ones because of overhead. 
 - Get element i by index:  
 Our linked list contains nodes that are, well, linked together. 
@@ -91,9 +91,11 @@ Same as the indexing worst case, O(n).
 I think it's O(n) because accessing the elements becomes O(1) when we already have the pointer. 
 
 
+## Part 3b)  
+Chose values a_1 = 0.008 and a_2 = 0.003. These parameters show that the two plots are parallel with O(1) and O(n), respectively, but still show that they can differ by some scalar. Did not finish it for the insrt method 
 
 
-# part 4: 
+## part 4: 
 If n=67 and k=7, the best location in the circle would be 61, as this would make you be the last man standing.
 (derived by calculator). 
 
