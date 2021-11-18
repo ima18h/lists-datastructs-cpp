@@ -92,7 +92,7 @@ I think it's O(n) because accessing the elements becomes O(1) when we already ha
 
 
 ## Part 3b)  
-Chose values a_1 = 0.008 and a_2 = 0.003. These parameters show that the two plots are parallel with O(1) and O(n), respectively, but still show that they can differ by some scalar. Did not finish it for the insrt method 
+Chose values a_1 = 0.008 and a_2 = 0.003. These parameters show that the two plots are parallel with O(1) and O(n), respectively, but still show that they can differ by some scalar. Did not finish it for the insrt method. We'd like to emphasize that from the plot we observe that get-method is linear for LinkedList and constant for ArrayList.
 
 
 ## part 4: 
