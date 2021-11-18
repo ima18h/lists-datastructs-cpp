@@ -104,12 +104,13 @@ void CircLinkedList::append(int intnum) {
   if (head == nullptr) {
     head = new Node(intnum, head, head);
   } else if (len == 1) {
-    head->next = new Node(intnum, head);
+    head->next = new Node(intnum, head, head);
     tail = head->next;
     head->prev = tail;
   } else{
-    head->prev = new Node(intnum, head->prev->prev, head);
-    tail = tail->next;
+    Node *pre = head->prev;
+    head->prev = new Node(intnum, pre, head);
+    pre->next = head->prev;
     // TODO: optimize setting tail.
     tail = this->node_index(len / 2);
   }
@@ -194,7 +195,7 @@ int main() {
   list.print();
   cout << "new length after append: " << list.length() << endl;
 
-  cout << "list at index 2: " << list[0] << endl;
+  cout << "list at index 3: " << list[3] << endl;
 /*
   list.pop();
   list.print();
