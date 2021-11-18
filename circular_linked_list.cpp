@@ -85,7 +85,7 @@ CircLinkedList::~CircLinkedList() {
     delete head;
   } else {
     Node* current = tail;
-    for (int i = 0; i < len-1; ++i) {
+    for (int i = 0; i < len; ++i) {
       current = current->prev;
       delete tail;
       tail = current;
