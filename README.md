@@ -1,9 +1,4 @@
-# H21_project2_erlingpv_imadha
-Project 2 for erlingpv (erlingpv@mail.uio.no) and imadha (imadha@mail.uio.no)
-
-
-
-## Part 1: 
+## Intro: 
 Used VSC to build/compile into executable. In our understanding, we managed to complete the problem correctly. 
 At least, it compiles and run, as well as providing promising and expected functionality/results. 
 Perhaps code style could be better. Made test functions for the shrink-methods and 1e) which we call from the 'main' block. 
@@ -16,7 +11,7 @@ we were not sure originally).
 
 
 
-## Part 3a) - Big O  
+## Big O: 
 
 # ARRAYList
 Get element i by index: In an ArrayList, this is just operation - you simply just access the element/index desired.
@@ -91,18 +86,10 @@ Same as the indexing worst case, O(n).
 I think it's O(n) because accessing the elements becomes O(1) when we already have the pointer. 
 
 
-## Part 3b)  
+## Values: 
 Chose values a_1 = 0.008 and a_2 = 0.003. These parameters show that the two plots are parallel with O(1) and O(n), respectively, but still show that they can differ by some scalar. Did not finish it for the insrt method. We'd like to emphasize that from the plot we observe that get-method is linear for LinkedList and constant for ArrayList.
 
 
-## part 4: 
+## Values 2: 
 If n=67 and k=7, the best location in the circle would be 61, as this would make you be the last man standing.
-(derived by calculator). 
-
-
-
-
-
-Unfortuneately, we were not able to finish part 4. 
-
-
+(derived by calculator).
