@@ -160,7 +160,7 @@ class ArrayList {
 
     // 1i) Help method for shrink
     //just for testing for the programmer, hence I violate the private variable agreement
-    int allocated(){
+    int _allocated(){
          // return capacity of the object;
          int allocated = capacity;
          return allocated;
@@ -235,7 +235,7 @@ void test_shrink_to_fit(){
     // example.print();
 
     cout << "---size is:" << example.lenght() << endl;
-    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---capacity is:" << example._allocated() << endl;
 
     cout << "---DELETING elements" << endl;
 
@@ -245,14 +245,14 @@ void test_shrink_to_fit(){
     // example.print();
 
     cout << "---size is:" << example.lenght() << endl;
-    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---capacity is:" << example._allocated() << endl;
 
     example.shrink_to_fit();
 
     cout << "-SHRINKING" << endl;
 
     cout << "---size is:" << example.lenght() << endl;
-    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---capacity is:" << example._allocated() << endl;
 
 
 }
@@ -266,14 +266,14 @@ void test_automatic_shrinking(){
         example.append(i);
     }
     cout << "---size is:" << example.lenght() << endl;
-    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---capacity is:" << example._allocated() << endl;
     cout << "---removing elements:" << endl;
      for (int i = 20; i<800; i++) {
         example.remove(i);
     }
 
     cout << "---size is:" << example.lenght() << endl;
-    cout << "---capacity is:" << example.allocated() << endl;
+    cout << "---capacity is:" << example._allocated() << endl;
 }
 
 int main() {
