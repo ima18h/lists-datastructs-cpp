@@ -25,10 +25,12 @@ Node::Node(int i, Node *p, Node *n) : data(i), prev(p), next(n) {
 
 // --------------------------- CircLinkedList class ---------------------------------
 // TODO: wanted to make a doubly linked list with both tail and head
+// has a node pointer to the head of the list. The list should start empty, with the head pointer pointing to a nullptr.
+// If the list only has one element, it should point at itself. If the list has two or more elements, the last element should point back at the first.
 class CircLinkedList {
  private:
   Node *head;
-  // tail for circular list is other side of circle. if even number, it should be closer to "front"
+  // tail for circular list is other side of circle. if even number, it should be closer to "back"
   // don't have time to implement this right now though
   Node *tail;
   int len;
@@ -37,7 +39,7 @@ class CircLinkedList {
  public:
   CircLinkedList();
   explicit CircLinkedList(vector<int> &);
-  explicit CircLinkedList(int n);
+  explicit CircLinkedList(int);
   ~CircLinkedList();
   int &operator[](int);
   int length() const;
@@ -46,14 +48,8 @@ class CircLinkedList {
   void remove(int);
   int pop(int);
   int pop();
-  void insert(int val, int index);
-  /*
-  * This method should start at the head,
-  * and iterate through the linked list,
-  * removing every k’th element,
-  * and adding them to a vector, until the linked list is empty.
-  */
-  vector<int> josephus_sequence(int k);
+  void insert(int, int);
+  vector<int> josephus_sequence(int);
 };
 
 // linked list method definitions, implementation ---------------------------------
@@ -201,9 +197,20 @@ void CircLinkedList::insert(int val, int index) {
   }
 }
 
+/*
+  * This method should start at the head,
+  * and iterate through the linked list,
+  * removing every k’th element,
+  * and adding them to a vector, until the linked list is empty.
+  */
+vector<int> CircLinkedList::josephus_sequence(int k) {
+    //TODO
+    return {};
+}
+
 int last_man_standing(int n, int k) {
     /*
-     * This function should use your CircLinkedList class to solve the
+     * This function should use the CircLinkedList class to solve the
      * original Josephus’ problem stated by Ball and Coxeter.
      */
 }
