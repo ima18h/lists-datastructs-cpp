@@ -30,10 +30,10 @@ class LinkedList {
   Node *tail;
   int len;
   Node* node_index(int);
+
  public:
   LinkedList();
   explicit LinkedList(vector<int> &);
-  CircLinkedList(int);
   ~LinkedList();
   int &operator[](int);
   int length() const;
@@ -43,13 +43,6 @@ class LinkedList {
   int pop(int);
   int pop();
   void insert(int val, int index);
-  /*
-   * This method should start at the head,
-   * and iterate through the linked list,
-   * removing every k’th element,
-   * and adding them to a vector, until the linked list is empty.
-   */
-  vector<int> josephus_sequence(int k);
 };
 
 // linked list method definitions, implementation ---------------------------------
@@ -57,7 +50,7 @@ class LinkedList {
 LinkedList::LinkedList() : head(nullptr), tail(nullptr), len(0) {
 }
 
-// constructor takes a vector and makes a linked lsit from the values
+// constructor takes a vector and makes a linked list from the values
 LinkedList::LinkedList(vector<int> &values) {
   // this constructor could probably just use append() instead
   if (values.empty()) {
@@ -81,11 +74,8 @@ LinkedList::LinkedList(vector<int> &values) {
   }
 }
 
-// TODO: solve Josephus Problems
-LinkedList::CircLinkedList(int n) {
-  // not implemented. init with 1 to n
-}
 
+// destructor
 LinkedList::~LinkedList() {
   if (len == 0) {
   } else if (len == 1) {
@@ -187,13 +177,6 @@ void LinkedList::insert(int val, int index) {
   }
 }
 
-
-int last_man_standing(n, k) {
-  /*
-   * This function should use your CircLinkedList class to solve the
-   * original Josephus’ problem stated by Ball and Coxeter.
-   */
-}
 
 // main for testing purposes -----------------------------------------------------------
 int main() {
