@@ -24,6 +24,7 @@ Node::Node(int i, Node *p, Node *n) : data(i), prev(p), next(n) {
 }
 
 // --------------------------- CircLinkedList class ---------------------------------
+// TODO: wanted to make a doubly linked list with both tail and head
 class CircLinkedList {
  private:
   Node *head;
